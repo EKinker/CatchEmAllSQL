@@ -1,13 +1,13 @@
 Part 2:
 
 
-* What are all the types of pokemon that a pokemon can have?
+#What are all the types of pokemon that a pokemon can have?
 SELECT * FROM types;
 
-* What is the name of the pokemon with id 45?
+#What is the name of the pokemon with id 45?
 SELECT * FROM pokemons WHERE id=45;
 
-* How many pokemon are there?
+#How many pokemon are there?
 SELECT COUNT(id) FROM pokemons;
 
 * How many types are there?
@@ -79,3 +79,18 @@ ON p.id=pt.pokemon_id
 GROUP BY p.id
 HAVING COUNT(*)=1;
 
+
+PART 4:
+
+SELECT
+    p.name 'Pokemon Name',
+    t.trainername 'Trainer Name',
+    pt.pokelevel 'Pokemon Level',
+    t1.name 'Primary Type',
+    t2.name 'Secondary Type'
+FROM pokemons p
+LEFT JOIN pokemon_trainer pt ON pt.pokemon_id=p.id
+LEFT JOIN trainers t ON t.trainerID=pt.trainerID
+JOIN types t1 ON t1.id=p.primary_type
+JOIN types t2 on t2.id=p.secondary_type
+ORDER BY pt.pokelevel desc, pt.attack desc, pt.maxhp desc;
